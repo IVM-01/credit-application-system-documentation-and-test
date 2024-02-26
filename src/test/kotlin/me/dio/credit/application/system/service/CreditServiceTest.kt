@@ -63,7 +63,7 @@ class CreditServiceTest {
   fun `should not create credit when invalid day first installment`() {
     //given
     val invalidDayFirstInstallment: LocalDate = LocalDate.now().plusMonths(5)
-    val credit: Credit = buildCredit(dayFirstInstallment = invalidDayFirstInstallment)
+    val credit: Credit = buildCredit(dayFirstOfInstallment = invalidDayFirstInstallment)
 
     every { creditRepository.save(credit) } answers { credit }
     //when
@@ -144,12 +144,12 @@ class CreditServiceTest {
   companion object {
     private fun buildCredit(
       creditValue: BigDecimal = BigDecimal.valueOf(100.0),
-      dayFirstInstallment: LocalDate = LocalDate.now().plusMonths(2L),
+      dayFirstOfInstallment: LocalDate = LocalDate.now().plusMonths(2L),
       numberOfInstallments: Int = 15,
       customer: Customer = CustomerServiceTest.buildCustomer()
     ): Credit = Credit(
       creditValue = creditValue,
-      dayFirstInstallment = dayFirstInstallment,
+      dayFirstInstallment = dayFirstOfInstallment,
       numberOfInstallments = numberOfInstallments,
       customer = customer
     )
